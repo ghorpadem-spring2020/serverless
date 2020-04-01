@@ -28,6 +28,10 @@ jobs:
           name: Upload LambdaFunction to S3
           command: |
             aws s3 cp index.zip s3://${bucket_name}/index.zip
+      - run: 
+          name: Install less
+          command: |
+            sudo apt-get install less -y
 
       - run:
           name: Update lambdaFunction code
