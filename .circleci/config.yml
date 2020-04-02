@@ -24,6 +24,7 @@ jobs:
           name: Zip Artifact
           command: |
             zip index.zip index.js
+            touch 777 lambdaFile.txt
       - run:
           name: Upload LambdaFunction to S3
           command: |
@@ -36,7 +37,7 @@ jobs:
       - run:
           name: Update lambdaFunction code
           command: |
-            aws lambda update-function-code --function-name EmailService --s3-bucket ${bucket_name} --s3-key index.zip --region us-east-1
+            aws lambda update-function-code --function-name EmailService --s3-bucket ${bucket_name} --s3-key index.zip --region us-east-1 > lambdaFile.txt
       
 workflows:
   version: 2
