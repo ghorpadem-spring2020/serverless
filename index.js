@@ -11,12 +11,17 @@ exports.emailService = function (event, context, callback) {
   console.log("Test email " + messageDataJson[0].user_email);
   var dataObj = [];
   for (var i in messageDataJson) {
-    dataObj[i] = "mrunalghorpade.me/v1/bill/" + messageDataJson[i].id;
+    dataObj[i] = process.env.DOMAIN_NAME+"/v1/bill/" + messageDataJson[i].id;
   }
   let ttl = 1 * 60 * 60 * 1000;
   let currentTime = new Date().getTime();
   let expirationTime = (currentTime + ttl).toString();
   let emailMessage = dataObj.toString();
+  let splitlink = emailMessage.split(',')
+  for(var j in splitlink)
+  {
+    emailMessage.concat("\n Bill Linkes"+j+"\n"+splitlink[j]);
+  }
   var emailParams = {
     Destination: {
       ToAddresses: [
