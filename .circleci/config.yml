@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Update lambdaFunction code
           command: |
-            aws lambda update-function-code --function-name EmailService --region us-east-1 --zip-file fileb://index.zip
+            aws lambda update-function-code --function-name EmailService --s3-bucket ${bucket_name},bundleType=zip,key=index.zip --region us-east-1
       
 workflows:
   version: 2
